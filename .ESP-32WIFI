@@ -1,0 +1,32 @@
+#include <WiFi.h>
+
+void setup() {
+  Serial.begin(115200);
+  delay(1000);
+
+  // WiFi modülünü başlat
+  WiFi.mode(WIFI_STA);
+
+  // WiFi ağlarını tarar
+  Serial.println("Taranan WiFi ağları:");
+  int numNetworks = WiFi.scanNetworks();
+  if (numNetworks == 0) {
+    Serial.println("Yakındaki WiFi ağı bulunamadı.");
+  } else {
+    Serial.print(numNetworks);
+    Serial.println(" WiFi ağı bulundu:");
+    for (int i = 0; i < numNetworks; i++) {
+      Serial.print(i + 1);
+      Serial.print(": ");
+      Serial.print(WiFi.SSID(i));  // Ağın SSID'sini yazdır
+      Serial.print(" (");
+      Serial.print(WiFi.RSSI(i));  // Sinyal gücünü yazdır
+      Serial.println(" dBm)");
+      delay(10);
+    }
+  }
+}
+
+void loop() {
+  // Sonsuz döngüde başka bir şey yapmıyoruz
+}
